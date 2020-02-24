@@ -437,6 +437,9 @@ void WebContentsDelegateQt::DidStopLoading()
 
     // NOTE: PageAlmostIdle feature not implemented
 
+    //This works around crbug-921916 and crbug-917176 where DidFinishNavigation is not called.
+    EmitLoadFinished(true, m_initialTargetUrl);
+
     if (m_loadingState == LoadingState::Loading)
         setLoadingState(LoadingState::Loaded);
 }
